@@ -37,7 +37,7 @@ fs.readFile("./home.html",(err, home) => {
     }
     http.createServer((req,res) => {
         let url = req.url;
-        res.writeHeader(200, {"content-type" : "text/html"});
+        res.writeHeader(200, { "content-type" : "text/html" });
         if(url == "/project")
         {
             res.write(projectfile);
