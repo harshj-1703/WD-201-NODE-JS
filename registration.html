@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REGISTRATION FORM</title>
+    <style>
+        body{
+            background-color: rgb(156, 235, 238);
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div ciass="relative flex min-h-screen flex-col justify-center overflow-hidden py-6 bg-gray-50"> 
+        <div class="relative bg-white px-6 pt-5 pb-5 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10" style="margin-top:5%; background-color: rgb(134, 198, 255);">
+        <div class="mx-auto max-w-md">
+        <h2 class="text-3x1 text-center font-bold leading-tight"> Registration Form </h2><br>
+        <div class="divide-y divide-gray-300/50">
+        <div ciass="space-y-6 py-8 text-base leading-7 text-gray-600">
+            
+        <form id="user-form">
+        <label for="name" class="text-md w-40 inline-block font-medium leading-5 text-gray-700"> Name </label>
+        <input type="text" id="fname" name="name" 
+        class="bg-gray-100 inline-block rounded-lg shadow-md px-4 py-3 mb-5 text-base leading-6 placeholder-g focus:invalid:border-pink-500 focus:invalid:ring-pink-500" 
+        placeholder="Enter full name" required></br> 
+        <label for="email" class="text-md w-40 inline-block font-medium leading-5 text-gray-700"> Email </label> 
+        <input type="email" id="email" name="email" 
+        class="bg-gray-100 inline-block rounded-lg shadow-md px-4 py-3 mb-5 text-base leading-6 placeholde focus:invalid:border-pink-500 focus:invalid:ring-pink-500" 
+        placeholder="Enter email" required></br> 
+        <label for="password" cIass="text-md w-40 inline-block font-medium leading-5 text-gray-700"> Password </label>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="password" id="password" name="password" class="bg-gray-100 inline-block rounded-lg shadow-md px-4 py-3 mb-5 text-base leading-6 p focus:invalid:border-pink-500 focus:invalid:ring-pink-500" 
+        placeholder="Enter password" required></br>
+        <label for="dob" class="text-md w-40 inline-block font-medium leading-5 text-gray-700">Date of Birth </label> 
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="date" id="dob" name="dob" class="bg-gray-100 inline-block rounded-lg shadow-md px-4 py-3 mb-5 text-base leading-6 placeholder-gra focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+        required></br> 
+        <label for="acceptTerms" dass="text-md w-50 inline-block font-medium leading-5 text-gray-700"> Accept Terms & Conditions </label> 
+        <input type="checkbox" id="acceptTerms" name="acceptTerms" class="bg-gray-100 inline-block rounded-lg shadow-md px-4 py-3 mb-5 text-base leading-6 placeholder-gray-500 focus:outline-none focus: placeholder-g"><br>
+        <button type="submit" name="submit" class="w-fit rounded-lg shadow-lg px-8 py-4 bg-green-500 text-white hover:bg-green-400 focus:outline-none focus:shadow-outline transition duration"
+        >Submit </button> </form> </div></div></div></div>
+        <div
+        class="relative bg-white px-6 mt-5 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm.mx-auto sm: rounded-lg sm:px-10"> 
+            <div class="mx-auto">
+            <h2 class="text-3xl text-center font-bold leading-tight" style="background-color: red; border-radius: 20px;">Entries</h2>
+            <div class="divide-y divide-gray-300/50" id="user-entries" style="background-color: rgb(249, 198, 198); border-radius: 20px;"></div> 
+            </div> 
+        </div>
+    </div>
+</body>
+
+<script>
+
+// const email = document.getElementById('email');
+// email.addEventListener('input', () => validate(email));
+
+// const submit = document.getElementById('submit');
+// submit.addEventListener('click', () => validate(email));
+
+function validate(element){
+    if(element.validity.typeMismatch){
+        element.setCustomValidity("The Email is not in the right format!!!");
+        element.reportValidity();
+    } else{
+        element.setCustomValidity('');
+    }
+}
+
+let userForm = document.getElementById("user-form");
+// console.log(userForm);
+const getEntries = () => {
+    let entries = localStorage.getItem("user-entries"); 
+    if (entries) {
+    entries = JSON.parse(entries);
+    } 
+    else {
+        entries = [];
+    }
+    return entries;
+}
+
+let userEntries = getEntries();
+
+const showAll = () => {
+        const entries = getEntries();
+
+        const tableEntries = entries.map((entry) => {
+            const nameCell = `<td class='border px-4 py-2'>${entry.name}</td>`; 
+            const emailCell = `<td class='border px-4 py-2'>${entry.email}</td>`; 
+            const passwordCell = `<td class='border px-4 py-2'>${entry.password}</td>`; 
+            const dobCell = `<td class='border px-4 py-2'>${entry.dob}</td>`; 
+            const acceptTermsCell = `<td class='border px-4 py-2'>${entry.acceptedTermsAndconditions}</td>`;
+            
+            const row = `<tr>${nameCell} ${emailCell} ${passwordCell} ${dobCell} ${acceptTermsCell}</tr>`;
+            return row;
+        }).join("\n");
+
+        const table = `<table class="table-auto w-full"><tr><th class="px-4 py-2">Name</th>
+                        <th class="px-4 py-2">Email</th><th class="px-4 py-2">Password</th>
+                        <th class="px-4 py-2">dob</th><th class="px-4 py-2">accepted terms?</th>
+                        </tr>${tableEntries} </table>`;
+        let details = document.getElementById("user-entries"); 
+        details.innerHTML = table;
+    }
+
+const saveUserForm = (event) => {
+    event.preventDefault(); 
+    const name = document.getElementById("fname").value; 
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value; 
+    const dob = document.getElementById("dob").value;
+    const acceptedTermsAndconditions = document.getElementById("acceptTerms").checked;
+    const entry = {
+        name, 
+        email, 
+        password,
+        dob, 
+        acceptedTermsAndconditions
+    };
+    
+    var d = new Date();
+    var d1 = new Date(dob);
+    current_year = d.getFullYear();
+    input_year = d1.getFullYear();
+    let age = current_year-input_year;
+
+    if(age < 18 || age > 55 || isNaN(age))
+    {
+        // console.log("age is invalid");
+        window.alert("age between 18 to 55.");
+    }
+    else
+    {
+        userEntries.push(entry);
+        localStorage.setItem("user-entries", JSON.stringify(userEntries));
+        showAll();
+        location.reload();
+    }
+}
+userForm.addEventListener("submit", saveUserForm);
+showAll();
+</script>
+</html>
