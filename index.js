@@ -53,5 +53,5 @@ fs.readFile("./home.html",(err, home) => {
             res.write(homefile);
             res.end;
         }
-    }).listen(args.port);
+    }).listen(arguments.port);
 });
