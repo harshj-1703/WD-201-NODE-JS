@@ -1,6 +1,5 @@
 const http = require('http');
 const fs = require('fs');
-const arguments = require('minimist')(process.argv.slice(2));   //get 2 argument in from commandline one is key and another is value
 
 let homefile ='';
 let projectfile = '';
@@ -29,6 +28,8 @@ fs.readFile("./project.html", (err, project) => {         //read project.html fi
     }
     projectfile = project;
 });
+
+const arguments = require('minimist')(process.argv.slice(2));   //get 2 argument in from commandline one is key and another is value
 // console.log(arguments.port);
 http.createServer((req,res) => {
     let url = req.url;
