@@ -30,28 +30,22 @@ fs.readFile("./project.html", (err, project) => {         //read project.html fi
     projectfile = project;
 });
 
-fs.readFile("./home.html",(err, home) => {
-    if(err)
+http.createServer((req,res) => {
+    let url = req.url;
+    res.writeHeader(200, { "content-type" : "text/html" });
+    if(url == "/project")
     {
-        throw err;
+        res.write(projectfile);
+        res.end;
     }
-    http.createServer((req,res) => {
-        let url = req.url;
-        res.writeHeader(200, { "content-type" : "text/html" });
-        if(url == "/project")
-        {
-            res.write(projectfile);
-            res.end;
-        }
-        else if(url == "/registration")
-        {
-            res.write(registrationfile);
-            res.end;
-        }
-        else
-        {
-            res.write(homefile);
-            res.end;
-        }
-    }).listen(arguments.port);
-});
+    else if(url == "/registration")
+    {
+        res.write(registrationfile);
+        res.end;
+    }
+    else
+    {
+        res.write(homefile);
+        res.end;
+    }
+}).listen(arguments.port);
