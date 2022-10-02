@@ -29,7 +29,7 @@ fs.readFile("./project.html", (err, project) => {         //read project.html fi
     }
     projectfile = project;
 });
-
+// console.log(arguments.port);
 http.createServer((req,res) => {
     let url = req.url;
     res.writeHeader(200, { "content-type" : "text/html" });
@@ -48,4 +48,4 @@ http.createServer((req,res) => {
         res.write(homefile);
         res.end;
     }
-}).listen(arguments.port);
+}).listen(arguments["port"]);
