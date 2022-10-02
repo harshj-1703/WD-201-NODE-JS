@@ -37,16 +37,16 @@ http.createServer((req,res) => {
     if(url == "/project")
     {
         res.write(projectfile);
-        res.end;
+        res.end();
     }
     else if(url == "/registration")
     {
         res.write(registrationfile);
-        res.end;
+        res.end();
     }
     else
     {
         res.write(homefile);
-        res.end;
+        res.end();
     }
 }).listen(arguments["port"]);
