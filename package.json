@@ -1,0 +1,18 @@
+{
+  "name": "1.-hello-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^8.24.0",
+    "minimist": "^1.2.6"
+  },
+  "devDependencies": {
+    "jest": "^29.1.2"
+  }
+}
