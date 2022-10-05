@@ -74,3 +74,5 @@ const todoList = () => {
   }
   return { all, add, markAsComplete, overdue, dueToday, dueLater, toDisplayableList };
 }
+
+module.exports = todoList;
